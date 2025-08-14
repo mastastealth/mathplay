@@ -1,1 +1,226 @@
-/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+input {
+  height: 50px;
+  position: absolute;
+  top: 10px;
+}
+
+ol {
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 30px;
+    padding: 0;
+  }
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  font-family: Lato, Tahoma, Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.25rem;
+  font-weight: 600;
+  padding-bottom: 4px;
+  position: relative;
+  width: 80px;
+
+  .score:after {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.75rem;
+  }
+
+  .score:is(
+      :is(
+        [data-letter='A'],
+        [data-letter='E'],
+        [data-letter='I'],
+        [data-letter='O'],
+        [data-letter='U'],
+        [data-letter='L'],
+        [data-letter='N'],
+        [data-letter='R'],
+        [data-letter='S'],
+        [data-letter='T']
+      )
+    ):after {
+    content: '1';
+  }
+
+  .score:is(:is([data-letter='D'], [data-letter='G'], )):after {
+    content: '2';
+  }
+
+  .score:is(
+      :is(
+        [data-letter='B'],
+        [data-letter='C'],
+        [data-letter='M'],
+        [data-letter='P'],
+
+      )
+    ):after {
+    content: '3';
+  }
+
+  .score:is(
+      [data-letter='F'],
+      [data-letter='H'],
+      [data-letter='V'],
+      [data-letter='W'],
+      [data-letter='Y'],
+
+    ):after {
+    content: '4';
+  }
+
+  .score:is(:is([data-letter='K'], )):after {
+    content: '5';
+  }
+
+  .score:is(:is([data-letter='J'], [data-letter='X'], )):after {
+    content: '8';
+  }
+
+  .score:is(:is([data-letter='Z'], [data-letter='Q'], )):after {
+    content: '10';
+  }
+
+  &[data-type='emerald'] {
+    background-color: #50c878;
+  }
+
+  &[data-type='dotted'] {
+    background-color: #e0115f;
+
+    &:after {
+      content: '.';
+      font-weight: bold;
+    }
+  }
+
+  &[data-type='gold'] {
+    background-color: #ffd700;
+  }
+
+  &[data-type='diamond'] {
+    background-color: #b9f2ff;
+
+    &:after {
+      align-items: flex-end;
+      aspect-ratio: 1 / 1;
+      background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MiIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMCAwdjQwaDQwTDAgMFoiIHN0eWxlPSJmaWxsLW9wYWNpdHk6LjMxIi8+PC9zdmc+);
+      content: attr(data-bonus);
+      display: flex;
+      mix-blend-mode: color-burn;
+      padding: 5px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 0.75rem;
+      width: 40%;
+    }
+  }
+
+  &:nth-child(n + 5):before {
+    background: rgb(255, 93, 23);
+    border-radius: 8px 8px 0 0;
+    color: white;
+    content: '+5';
+    font-size: 1rem;
+    line-height: 25px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: -25px;
+    left: 0;
+    z-index: -1;
+  }
+
+  &:nth-child(n + 8):before {
+    content: '+10';
+  }
+
+  &:nth-child(n + 10):before {
+    content: '+15';
+  }
+
+  &:nth-child(n + 12):before {
+    content: '+20';
+  }
+}
+
+/* Printer specific styles */
+
+@media print {
+  input {
+    display: none;
+  }
+
+  p {
+    margin-bottom: 50px;
+  }
+
+  li {
+    font-size: 1.7rem;
+    list-style-position: inside;
+  }
+
+  li:after {
+    border: 2px dashed black;
+    content: '';
+    display: inline-flex;
+    height: 8vw;
+    margin-left: 10px;
+    margin-top: 5px;
+    position: relative;
+    width: 100%;
+  }
+
+  .tile {
+    font-size: 1.8rem;
+    font-weight: 500;
+    width: 6.5vw;
+
+    &[data-type='emerald'] {
+      background-color: rgb(119, 225, 155);
+    }
+
+    .score:after {
+      line-height: 1.2;
+      top: 0;
+      font-size: 0.5rem;
+    }
+
+    &[data-type='diamond']:after {
+      font-size: 0.5rem;
+    }
+
+    &:nth-child(n + 5):before {
+      font-size: 0.8rem;
+      line-height: 20px;
+      top: -20px;
+    }
+  }
+}

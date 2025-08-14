@@ -2,6 +2,7 @@ const {
   babelCompatSupport,
   templateCompatSupport,
 } = require('@embroider/compat/babel');
+const { hotAstProcessor } = require('ember-vite-hmr/lib/babel-plugin');
 
 module.exports = {
   plugins: [
@@ -14,7 +15,7 @@ module.exports = {
           'ember-cli-htmlbars-inline-precompile',
           'htmlbars-inline-precompile',
         ],
-        transforms: [...templateCompatSupport()],
+        transforms: [...templateCompatSupport(), hotAstProcessor.transform],
       },
     ],
     [
@@ -34,6 +35,7 @@ module.exports = {
       },
     ],
     ...babelCompatSupport(),
+    ['ember-vite-hmr/lib/babel-plugin'],
   ],
 
   generatorOpts: {
