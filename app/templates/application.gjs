@@ -171,8 +171,8 @@ export default class Application extends Component {
       <em>IF</em>
       used in last letter. Bonuses (orange) are added separately.
       <br /><br />
-      <strong>Final score</strong>: Gold Count * Word Score (* 2 if last letter
-      dotted) + Bonus Score
+      <strong>Final score</strong>: (Gold Count * Word Score [* 2 if last letter
+      dotted]) + Bonus Score
     </p>
 
     <ol>

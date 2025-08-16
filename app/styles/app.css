@@ -8,6 +8,10 @@ body {
   height: 100%;
 }
 
+body {
+  padding: 0 5vw;
+}
+
 p {
   font-family: Lato, Tahoma, Arial, sans-serif;
   line-height: 1.5;
@@ -149,6 +153,10 @@ ol {
 /* Printer specific styles */
 
 @media print {
+  body {
+    padding: 0 10px;
+  }
+
   input {
     display: none;
   }
