@@ -8,28 +8,55 @@ body {
   height: 100%;
 }
 
-body {
-  display: grid;
-  place-items: center;
+p {
+  font-family: Lato, Tahoma, Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0 auto 20px;
+  padding: 10px;
+  text-align: center;
 }
 
 input {
   height: 50px;
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 ol {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
 
   li {
     margin-bottom: 30px;
     padding: 0;
+    position: relative;
+
+    &:after {
+      border: 2px dashed black;
+      content: '';
+      display: inline-flex;
+      height: 8vw;
+      margin-left: 10px;
+      margin-top: 5px;
+      position: relative;
+      width: 100%;
+    }
+
+    img {
+      aspect-ratio: 1 / 1;
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      width: 6.5vw;
+    }
   }
 }
 
 .tile {
+  background: white;
   aspect-ratio: 1 / 1;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 3px;
@@ -51,60 +78,8 @@ ol {
     font-size: 0.75rem;
   }
 
-  .score:is(
-      :is(
-        [data-letter='A'],
-        [data-letter='E'],
-        [data-letter='I'],
-        [data-letter='O'],
-        [data-letter='U'],
-        [data-letter='L'],
-        [data-letter='N'],
-        [data-letter='R'],
-        [data-letter='S'],
-        [data-letter='T']
-      )
-    ):after {
-    content: '1';
-  }
-
-  .score:is(:is([data-letter='D'], [data-letter='G'], )):after {
-    content: '2';
-  }
-
-  .score:is(
-      :is(
-        [data-letter='B'],
-        [data-letter='C'],
-        [data-letter='M'],
-        [data-letter='P'],
-
-      )
-    ):after {
-    content: '3';
-  }
-
-  .score:is(
-      [data-letter='F'],
-      [data-letter='H'],
-      [data-letter='V'],
-      [data-letter='W'],
-      [data-letter='Y'],
-
-    ):after {
-    content: '4';
-  }
-
-  .score:is(:is([data-letter='K'], )):after {
-    content: '5';
-  }
-
-  .score:is(:is([data-letter='J'], [data-letter='X'], )):after {
-    content: '8';
-  }
-
-  .score:is(:is([data-letter='Z'], [data-letter='Q'], )):after {
-    content: '10';
+  .score:after {
+    content: attr(data-score);
   }
 
   &[data-type='emerald'] {
@@ -185,17 +160,6 @@ ol {
   li {
     font-size: 1.7rem;
     list-style-position: inside;
-  }
-
-  li:after {
-    border: 2px dashed black;
-    content: '';
-    display: inline-flex;
-    height: 8vw;
-    margin-left: 10px;
-    margin-top: 5px;
-    position: relative;
-    width: 100%;
   }
 
   .tile {
