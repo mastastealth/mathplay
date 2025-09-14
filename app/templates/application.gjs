@@ -35,7 +35,7 @@ export default class Application extends Component {
         const letterScore = this.getLetterScore(letter.toUpperCase());
         const bonus = 5 * this.wordList.length;
 
-        wordScore += type === 'emerald' ? letterScore * 4 : letterScore;
+        wordScore += type === 'emerald' ? letterScore * 5 : letterScore;
         if (type === 'diamond') wordScore += bonus;
         if (type === 'gold') goldCount++;
 
@@ -162,7 +162,7 @@ export default class Application extends Component {
     <p>Add up tiles for
       <strong>Word Score</strong>. Emerald tiles multiply their
       <strong>letter score</strong>
-      by 4. Diamond tiles add their bonus to the
+      by 5. Diamond tiles add their bonus to the
       <strong>letter score</strong>. Multiply
       <strong>Word Score</strong>
       by the amount of Gold tiles. Multiply
